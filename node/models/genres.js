@@ -1,3 +1,5 @@
+// *** DEPRECATED --- This is from Mosh course, saved for example ***
+
 const Joi = require('joi');
 const mongoose = require('mongoose');
 

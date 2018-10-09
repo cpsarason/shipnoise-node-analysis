@@ -2,12 +2,15 @@ const config = require('config');
 
 const express = require('express');
 const app = express();
-const genres = require('./routes/genres');
-const customers = require('./routes/customers');
+
+//const genres = require('./routes/genres');
+//const customers = require('./routes/customers');
+
+const broadcasts = require('./routes/broadcasts');
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/vidly')
+mongoose.connect('mongodb://localhost/AIS')
     .then(()=> console.log('Connected to MongoDB...'))
     .catch( err => console.error('Could not connect to mongodb'));
 
@@ -16,8 +19,13 @@ mongoose.connect('mongodb://localhost/vidly')
 
 
 app.use(express.json());
-app.use('/api/genres', genres);
-app.use('/api/customers', customers);
+
+//app.use('/api/genres', genres);
+//app.use('/api/customers', customers);
+
+app.use('/api/broadcasts', broadcasts);
+
+
 
 // if (app.get('env') === 'development') {
 //     app.use(morgan('tiny'));

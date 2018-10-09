@@ -1,3 +1,6 @@
+// *** DEPRECATED --- This is from Mosh course, saved for example ***
+
+
 const {Customer, validate} = require('../models/customers');
 
 

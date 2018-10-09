@@ -1,28 +1,25 @@
-// *** DEPRECATED --- This is from Mosh course, saved for example ***
-
-
 const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const {Genre, validate} = require('../models/genres');
+const {Broadcast, validate} = require('../models/broadcasts');
 
 
 
 
 router.get('/', async (req,res) => {
-    const genres = await Genre.find().sort('name');
-    res.send(genres);
+    const broadcasts = await Broadcast.find().sort('MMSI');
+    res.send(broadcasts);
 });
 
 // // /api/genres/1
 
 router.get('/:id', async (req,res) =>{
-    const genre = await Genre.findById(req.params.id);
+    const broadcast = await Broadcast.findById(req.params.id);
     
     if (!genre) return res.status(404).send('The genre with the given ID was not found');
     
-    res.send(genre);
+    res.send(broadcast);
 });
 
 router.post('/', async (req,res) =>{
@@ -31,9 +28,9 @@ router.post('/', async (req,res) =>{
     if (error) return res.status(400).send(error.details[0].message);
         
 
-    let genre = new Genre({ name: req.body.name });
-    genre = await genre.save();
-    res.send(genre);
+    let broadcast = new Broadcast({ name: req.body.name });
+    broadcast = await broadcast.save();
+    res.send(broadcast);
 });
 
 router.put('/:id', async (req,res) => {
@@ -41,28 +38,28 @@ router.put('/:id', async (req,res) => {
     const { error } = validate(req.body); // object destructuring. pulls the "error" property from what validateGenre returns
     if (error) return res.status(400).send(error.details[0].message);
 
-    const genre = await Genre.findByIdAndUpdate( req.params.id, { name: req.body.name },{
+    const broadcast = await Broadcast.findByIdAndUpdate( req.params.id, { name: req.body.name },{
         new: true
     });
-    // look up the genre
+    // look up the broadcast
     // if not existing return 404
     
-    if (!genre) return res.status(404).send('The genre with the given ID was not found');
+    if (!broadcast) return res.status(404).send('The broadcast with the given ID was not found');
        
-    // return the updated genre
-    res.send(genre);
+    // return the updated broadcast
+    res.send(broadcast);
 
 });
 
 router.delete('/:id', async (req,res) => {
-    const genre = await Genre.findByIdAndRemove(req.params.id);
-    //look up the genre
+    const broadcast = await Broadcast.findByIdAndRemove(req.params.id);
+    //look up the broadcast
     //not existing, return 404
     
-    if (!genre) return res.status(404).send('The genre with the given ID was not found');
+    if (!broadcast) return res.status(404).send('The broadcast with the given ID was not found');
 
-    // return the same genre
-    res.send(genre);
+    // return the same broadcast
+    res.send(broadcast);
 
 });
 
