@@ -5,7 +5,7 @@ const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const {Genre, validate} = require('../models/genres');
+const {Genre, validate} = require('../models/genre');
 
 
 
