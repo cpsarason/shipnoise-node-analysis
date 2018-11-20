@@ -1,0 +1,1 @@
+wget -np -r -nH -L --cut-dirs=2 https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2016/
